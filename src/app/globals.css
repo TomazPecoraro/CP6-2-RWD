@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  .cabecalho {
+    @apply  bg-gray-700 text-white h-20;
+    & nav{
+        @apply flex flex-row justify-around;
+        & a{
+            @apply block py-7 transition-all duration-300 ease-out hover:bg-white hover:text-black font-extrabold;
+        }
+    }
+  }
+}
+
+
+
+
