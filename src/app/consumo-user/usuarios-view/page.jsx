@@ -26,7 +26,7 @@ return(
                     <p>{usuario.nome}</p>
                     <p>{usuario.email}</p>
                     
-                    <p><Link href={`/usuarios/${usuario.id}`}>Ver mais...</Link></p>
+                    <p><Link href={`/consumo-user/usuarios-view/${usuario.id}`}>Ver mais...</Link></p>
                     <hr />
                     
 
