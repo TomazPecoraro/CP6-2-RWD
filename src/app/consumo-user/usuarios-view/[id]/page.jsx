@@ -1,12 +1,14 @@
-import Link from "next/link";
+
+import { redirect } from "next/navigation";
 
 
-export async function UserViewId({params}){
 
-let user;
+export default async function UserViewId({params}){
+
+let usuario;
 try{
 const response  = await fetch(`http://localhost:3000/dados/usuarios-api/${params.id}`)
-user = await response.json()
+usuario = await response.json()
 }
 catch(error){
     console.log(error)
@@ -22,14 +24,13 @@ return(
                 <ul>
             
             
-                <li key={user.id}>
+                <li key={usuario.id}>
                     
-                    <p>{user.id}</p>
-                    <p>{user.nome}</p>
-                    <p>{user.email}</p>
-                    <p>{user.senha}</p>
+                    <p>{usuario.id}</p>
+                    <p>{usuario.nome}</p>
+                    <p>{usuario.email}</p>
+                    <p>{usuario.senha}</p>
                     <hr />
-                    <p><Link href={`/dados/usuarios-api/0`}>VOLTAR</Link></p>
 
                 </li>
            
