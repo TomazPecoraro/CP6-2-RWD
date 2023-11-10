@@ -1,35 +1,41 @@
-import { promises as fs } from 'fs';
+import{promises as fs} from 'fs'
+import { NextResponse } from 'next/server';
 
-export async function getAllUsers() {
-  try {
-    
-    const file = await fs.readFile(process.cwd() + '/src/app/api/base/db.json', 'utf8');
-    const listaUsuarios = await JSON.parse(file);
 
-    return listaUsuarios.usuarios;
-  } catch (error) {
-    
-    console.error('Erro ao obter usuários:', error);
-    throw error;
-  }
-}
 
-export async function getUserById(userId) {
-  try {
+export async function GET(){
   
-    const file = await fs.readFile(process.cwd() + '/src/app/api/base/db.json', 'utf8');
-    const listaUsuarios = await JSON.parse(file);
+  const file =await fs.readFile(
+    process.cwd() + "/src/app/api/base/db.json",
+    "utf-8"
+  );
 
-    const user = listaUsuarios.usuarios.find((user) => user.id === userId);
+  const listaUsuarios = await JSON.parse(file);
 
-    if (!user) {
-      return null;
+ 
+  return NextResponse.json(listaUsuarios.usuarios);
+}
+export async function POST(request,response) {
+  
+  const file = await fs.readFile(
+    process.cwd() + "/src/app/api/base/db.json",
+    "utf-8"
+  );
+
+  
+    const userLogin = await request.json();
+
+
+  const listaUsuarios = await JSON.parse(file);
+
+    const userValid = listaUsuarios.usuarios.find((user)=> user.email == userLogin.email && user.senha == userLogin.senha)
+
+    
+    if(!userValid){
+        //Retornando os status da validação
+        return NextResponse.json({ "status": false});
     }
 
-    return user;
-  } catch (error) {
-
-    console.error('Erro ao obter usuário por ID:', error);
-    throw error;
-  }
+ 
+  return NextResponse.json({"status":true},userValid);
 }
