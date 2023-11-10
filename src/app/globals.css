@@ -5,7 +5,7 @@
 
 @layer components{
     .cabecalho{
-        @apply bg-gray-700 text-white h-20;
+        @apply bg-blue-500 text-white h-20;
         & nav{
             @apply flex flex-row justify-around;
             & a{
